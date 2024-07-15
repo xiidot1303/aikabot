@@ -1,0 +1,10 @@
+{% extends "admin/change_list.html" %}
+
+{% block object-tools-items %}
+  <form method="post" action="{% url 'create_join_link' %}" style="display:inline;">
+    {% csrf_token %}
+    <input type="number" name="number_of_link" min="1" placeholder="Soni" style="width: 150px; margin-right: 10px;" value=1 required>
+    <button type="submit" class="button btn btn-primary">Создать ссылку</button>
+  </form>
+  {{ block.super }}
+{% endblock %}
