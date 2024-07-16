@@ -74,9 +74,8 @@ class MesageAdmin(admin.ModelAdmin):
 
 class JoinLinkAdmin(admin.ModelAdmin):
     change_list_template = 'admin/join_link/join_link_change_list.html'
-    def get_list_display(self, request):
-        return [field.name for field in self.model._meta.concrete_fields]
-    list_editable = ()
+    list_display = ['bot_user', 'link', 'is_used', 'used_date']
+    list_display_links = None
 
 admin.site.register(Bot_user, Bot_userAdmin)
 admin.site.register(Message, MesageAdmin)

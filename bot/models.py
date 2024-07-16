@@ -7,8 +7,9 @@ class Bot_user(models.Model):
     username = models.CharField(null=True, blank=True, max_length=256, verbose_name='username')
     firstname = models.CharField(null=True, blank=True, max_length=256, verbose_name='Никнейм')
     phone = models.CharField(null=True, blank=True, max_length=16, default='', verbose_name='Телефон')
-    lang = models.CharField(null=True, blank=True, max_length=4, verbose_name='')
+    lang = models.CharField(null=True, blank=True, max_length=4, default='uz', verbose_name='')
     date = models.DateTimeField(db_index=True, null=True, auto_now_add=True, blank=True, verbose_name='Дата регистрации')
+    is_active = models.BooleanField(default=True)
 
     def __str__(self) -> str:
         try:
@@ -41,6 +42,7 @@ class Message(models.Model):
 class JoinLink(models.Model):
     bot_user = models.ForeignKey('bot.Bot_user', blank=True, null=True, verbose_name='Пользователь', on_delete=models.PROTECT)
     link = models.CharField(null=True, blank=True, max_length=255, verbose_name='Ссылка')
+    code = models.CharField(null=True, blank=True, max_length=64, verbose_name='Код')
     is_used = models.BooleanField(default=False, verbose_name="Использован?")
     used_date = models.DateTimeField(null=True, blank=True, verbose_name = "Дата использования")
 

@@ -11,7 +11,7 @@ def is_registered(id):
 
 @sync_to_async
 def is_staff_exists(user_id):
-    is_exists = Bot_user.objects.filter(user_id = user_id).exists()
+    is_exists = Bot_user.objects.filter(user_id = user_id, is_active = True).exists()
     return is_exists
 
 async def get_user_by_update(update: Update):
@@ -29,7 +29,8 @@ async def check_username(update):
         await user.asave()
 
 async def get_or_create(user_id):
-    obj = await Bot_user.objects.aget_or_create(user_id=user_id)
+    obj, is_created = await Bot_user.objects.aget_or_create(user_id=user_id)
+    return obj
     
 async def get_object_by_user_id(user_id):
     obj = await Bot_user.objects.aget(user_id=user_id)

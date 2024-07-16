@@ -11,6 +11,6 @@ async def create(request):
         for i in range(number_of_links):
             random_symbol = await generate_random_symbols(10)
             link_ = f"t.me/{bot_name}?start={random_symbol}"
-            join_link = await create_join_link(link_)
+            join_link = await create_join_link(link_, random_symbol)
         messages.success(request, f'Успешно создано {number_of_links} ссылок')
     return redirect("admin:bot_joinlink_changelist")
