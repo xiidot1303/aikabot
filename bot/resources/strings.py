@@ -59,6 +59,62 @@ lang_dict = {
         ""
         ],
 
+    "visit to the doctor": ["👨🏻‍⚕️ Shifokor qabuliga yozdirish", "👨🏻‍⚕️ Визит к врачу"],
+
+    "visit to the pharmacy": ["💊 Dorixonaga tashrifni yozdirish", "💊 Визит в аптеку"],
+
+    "meeting with partners": ["👥 Hamkorlar bilan uchrashuv", "👥 Встреча с партнерами"],
+
+    "create visit": ["📝 Tashrif yaratish", "📝 Запись визита"],
+
+    "select type of visit": ["", ""],
+
+    "type address": ["", ""],
+
+    "type comment": ["", ""],
+
+    "send live location": ["", ""],
+
+    "address": ["", ""],
+
+    "confirm visit?": ["", ""],
+
+    "yes": ["", ""],
+
+    "no": ["", ""],
+
+    "visit is canceled": ["", ""],
+
+    "visit is completed": ["", ""],
+
+    "comment": ["", ""],
+
+    "": ["", ""],
+
+    "": ["", ""],
+
+    "": ["", ""],
+
+    "": ["", ""],
+
+    "": ["", ""],
+
+    "": ["", ""],
+
+    "": ["", ""],
+
+    "": ["", ""],
+
+    "": ["", ""],
+
+    "": ["", ""],
+
+    "": ["", ""],
+
+    "": ["", ""],
+
+    "": ["", ""],
+
     "": ["", ""],
 
     "": ["", ""],

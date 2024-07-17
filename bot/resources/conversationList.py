@@ -1,4 +1,4 @@
-n = 8
+n = 13
 (
     GET_LANG,
     GET_NAME,
@@ -8,4 +8,11 @@ n = 8
     LANG_SETTINGS,
     NAME_SETTINGS,
     PHONE_SETTINGS,
+    GET_VISIT_TYPE,
+    GET_VISIT_ADRESS,
+    GET_VISIT_COMMENT,
+    GET_VISIT_LOCATION,
+    CONFIRM_VISIT,
+
+
 ) = range(0, n)

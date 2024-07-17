@@ -1,5 +1,6 @@
 from bot.bot import *
 from bot.services.join_link_service import *
+from bot.bot.visit import _to_the_getting_visit_type
 
 async def start(update: Update, context: CustomContext):
     if await is_group(update):
@@ -37,3 +38,7 @@ async def start(update: Update, context: CustomContext):
         text = "Вам отказано в доступе"
         await update.message.reply_text(text)
         return
+
+@check_user
+async def visit(update: Update, context: CustomContext):
+    return await _to_the_getting_visit_type(update, context)

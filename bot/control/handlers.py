@@ -12,7 +12,7 @@ from bot.resources.strings import lang_dict
 from bot.resources.conversationList import *
 
 from bot.bot import (
-    main, login
+    main, login, visit
 )
 
 exceptions_for_filter_text = (~filters.COMMAND) & (~filters.Text(lang_dict['main menu']))
@@ -40,6 +40,39 @@ login_handler = ConversationHandler(
     persistent=True
 )
 
+visit_handler = ConversationHandler(
+    entry_points=[
+        MessageHandler(filters.Text(lang_dict['create visit']), main.visit)
+    ],
+    states={
+        GET_VISIT_TYPE: [
+            MessageHandler(filters.TEXT & exceptions_for_filter_text, visit.get_visit_type)
+        ],
+        GET_VISIT_LOCATION: [
+            MessageHandler(filters.LOCATION | filters.Text(lang_dict['back']), visit.get_location)
+        ],
+        GET_VISIT_ADRESS: [
+            MessageHandler(filters.TEXT & exceptions_for_filter_text, visit.get_address)
+        ],
+        GET_VISIT_COMMENT: [
+            MessageHandler(filters.TEXT & exceptions_for_filter_text, visit.get_comment)
+        ],
+        CONFIRM_VISIT: [
+            MessageHandler(filters.Text(lang_dict['back']), visit._to_the_getting_comment),
+            CallbackQueryHandler(visit.confirm_visit, pattern=r"^confirm_visit")
+        ],
+
+    },
+    fallbacks=[
+        CommandHandler("start", visit.start),
+        MessageHandler(filters.Text(lang_dict['main menu']), visit.start)
+    ],
+    name="visit",
+    persistent=True
+)
+
 handlers = [
-    login_handler
+    login_handler,
+    visit_handler,
+
 ]
