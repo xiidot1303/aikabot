@@ -18,14 +18,14 @@ async def get_user_by_update(update: Update):
     user = await Bot_user.objects.aget(user_id=update.effective_user.id)
     return user
 
-async def check_username(update):
+async def check_username(update: Update):
     user: Bot_user = await get_user_by_update(update)
 
-    if user.username != update.message.chat.username:
-        user.username = update.message.chat.username
+    if user.username != update.effective_chat.username:
+        user.username = update.effective_chat.username
         await user.asave()
-    if user.firstname != update.message.chat.first_name:
-        user.firstname = update.message.chat.first_name
+    if user.firstname != update.effective_chat.first_name:
+        user.firstname = update.effective_chat.first_name
         await user.asave()
 
 async def get_or_create(user_id):

@@ -32,7 +32,7 @@ class CustomContext(CallbackContext[ExtBot, dict, dict, dict]):
 
 
 async def is_message_back(update: Update):
-    if update.message.text == await get_word("back", update):
+    if update.effective_message.text == await get_word("back", update):
         return True
     else:
         return False
@@ -48,7 +48,7 @@ async def main_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     reply_markup = ReplyKeyboardMarkup(keyboard=keyboards, resize_keyboard=True)
     await bot.send_message(
-        update.effective_user.id
+        update.effective_user.id,
         await get_word('main menu', update),
         reply_markup=reply_markup
     )

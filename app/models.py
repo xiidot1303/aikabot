@@ -11,4 +11,7 @@ class Visit(models.Model):
         ('partners', 'Встреча с партнерами'),
     ]
     type = models.CharField(null=True, blank=False, max_length=32, choices=TYPE_CHOICES, verbose_name="Тип визита")
+    lat = models.CharField(null=True, blank=True, max_length=16)
+    lon = models.CharField(null=True, blank=True, max_length=16)
+    location = models.CharField(null=True, blank=True, max_length=255, verbose_name='Расположение')
     

@@ -3,6 +3,9 @@ import requests
 import json
 import random
 import string
+from yandex_geocoder import Client
+from decimal import Decimal
+from config import YANDEX_API_KEY
 
 async def get_user_ip(request):
     x_forwarded_for = await request.META.get('HTTP_X_FORWARDED_FOR')
@@ -40,3 +43,8 @@ async def send_request(url, data=None, headers=None, type='get'):
 async def generate_random_symbols(length):
     symbols = string.ascii_letters + string.digits
     return ''.join(random.choice(symbols) for _ in range(length))
+
+async def get_address_by_coordinates(lat, lon):
+    client = Client(YANDEX_API_KEY)
+    address = client.address(Decimal(lon), Decimal(lat))
+    return address

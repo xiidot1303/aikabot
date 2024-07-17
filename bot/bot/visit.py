@@ -1,5 +1,8 @@
 from bot.bot import *
 from app.services.visit_service import *
+from app.services.visit_service import *
+import asyncio
+from app.utils import get_address_by_coordinates
 
 async def _to_the_getting_visit_type(update: Update, context: CustomContext):
     buttons = [
@@ -102,11 +105,29 @@ async def confirm_visit(update: Update, context: CustomContext):
     else:
         text = await get_word('visit is canceled', update)
         await bot_send_message(update, context, text, reply_markup=ReplyKeyboardRemove(True))
+    
+    # get all attributes
+    bot_user = await get_user_by_update(update)
+    address = context.user_data['address']
+    comment = context.user_data['comment']
+    visit_type = context.user_data['visit_type']
+    lat, lon = context.user_data['lat'], context.user_data['lon']
+    # create visit object
+    visit_obj: Visit = await create_visit(bot_user, address, comment, visit_type, lat, lon)
+    # set address to Visit by lat and lon
+    context.job_queue.run_once(set_location_of_visit, 0, data=(lat,lon, visit_obj.id), chat_id=update.effective_message.chat_id)
+
     await update.callback_query.edit_message_reply_markup(reply_markup=None)
     await main_menu(update, context)
     return ConversationHandler.END
 
-
+async def set_location_of_visit(context: CustomContext):
+    job = context.job
+    lat, lon, visit_id = job.data
+    visit: Visit = await get_visit_by_id(visit_id)
+    address = await get_address_by_coordinates(lat, lon)
+    visit.location = address
+    await visit.asave()
 
 async def start(update: Update, context: CustomContext):
     await main_menu(update, context)

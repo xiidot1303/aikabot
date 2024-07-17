@@ -26,7 +26,7 @@ from config import BOT_API_TOKEN
 bot = Bot(BOT_API_TOKEN)
 
 async def update_message_reply_text(update: Update, text, reply_markup=None, disable_web_page_preview = True):
-    message = await update.message.reply_text(
+    message = await update.effective_message.reply_text(
         text,
         reply_markup=reply_markup,
         parse_mode = ParseMode.HTML,
