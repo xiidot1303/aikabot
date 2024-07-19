@@ -55,8 +55,8 @@ lang_dict = {
     ],
 
     "access denied": [
-        "", 
-        ""
+        "Ruhsat yo'q", 
+        "Доступ запрещен"
         ],
 
     "visit to the doctor": ["👨🏻‍⚕️ Shifokor qabuliga yozdirish", "👨🏻‍⚕️ Визит к врачу"],
@@ -67,27 +67,41 @@ lang_dict = {
 
     "create visit": ["📝 Tashrif yaratish", "📝 Запись визита"],
 
-    "select type of visit": ["", ""],
+    "select type of visit": [
+        "Iltimos, tashrif turini tanlang", 
+        "Пожалуйста, выберите тип визита"
+        ],
 
     "type address": ["", ""],
 
-    "type comment": ["", ""],
+    "type comment": ["Uchrashuv haqida izohlaringizni qoldiring.", "Введите комментарий о встрече."],
 
-    "send live location": ["", ""],
+    "send live location": [
+        "<b>O'z jon joylashuvingizni yuboring</b>\n\n" \
+            "<b>Ko'rsatma:</b>\n" \
+                "📎 ni bosing -> Joylashuv -> Jonli joylashuvni ulashish -> 15 daqiqa\n\n" \
+                    "Joylashuvni yuborganingizdan keyin uni o'chirib qo'yishingiz mumkin",
 
-    "address": ["", ""],
+                
+        "<b>Транслируйте свое местоположение.</b>\n\n" \
+            "<b>Инструкция:</b>\n" \
+                "Нажмите на 📎 -> Геопозиция-> Транслировать геопозицию -> 15 минут\n\n" \
+                    "После отправки геолокации вы можете остановить трансляцию.", 
+        ],
 
-    "confirm visit?": ["", ""],
+    "address": ["📍 Manzil", "📍 Адрес"],
 
-    "yes": ["", ""],
+    "confirm visit?": ["Tashrifni tasdiqlaysizmi?", "Подтверждаете запись?"],
 
-    "no": ["", ""],
+    "yes": ["Ha", "Да"],
 
-    "visit is canceled": ["", ""],
+    "no": ["Yo'q", "Нет"],
 
-    "visit is completed": ["", ""],
+    "visit is canceled": ["❌ Tashrif bekor qilindi", "❌ Запись отменена"],
 
-    "comment": ["", ""],
+    "visit is completed": ["✅ Tashrif muvaffaqiyatli yaratildi", "✅ Запись успешно создана"],
+
+    "comment": ["💬 Izoh", "💬 Комментарий"],
 
     "": ["", ""],
 
