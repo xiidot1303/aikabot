@@ -31,6 +31,7 @@ async def update_message_reply_text(update: Update, text, reply_markup=None, dis
         reply_markup=reply_markup,
         parse_mode = ParseMode.HTML,
         disable_web_page_preview = disable_web_page_preview,
+        protect_content=True
     )
     return message
 
@@ -42,6 +43,7 @@ async def bot_send_message(update: Update, context: ContextTypes.DEFAULT_TYPE, t
         reply_markup=reply_markup,
         parse_mode = ParseMode.HTML,
         disable_web_page_preview = disable_web_page_preview,
+        protect_content=True
         )
     return message
 
