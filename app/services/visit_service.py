@@ -1,3 +1,4 @@
+from app.services import *
 from app.models import Visit
 
 async def create_visit(bot_user, address, comment, type, lat, lon) -> Visit:
@@ -10,3 +11,7 @@ async def create_visit(bot_user, address, comment, type, lat, lon) -> Visit:
 async def get_visit_by_id(id):
     obj = await Visit.objects.aget(id = id)
     return obj
+
+def visits_all():
+    query = Visit.objects.all()
+    return query 
