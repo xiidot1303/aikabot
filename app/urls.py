@@ -7,7 +7,7 @@ from django.contrib.auth.views import (
 )
 
 from app.views import (
-    main, visit
+    main, visit, doctor, pharmacy, partner
 )
 
 urlpatterns = [
@@ -26,4 +26,9 @@ urlpatterns = [
     re_path(r'^files/(?P<path>.*)$', main.get_file),
 
 
+    path('successfully-created', main.successfully_created, name='successfully_created'),
+    # doctor
+    path('doctor-add', doctor.DoctorCreateView.as_view(), name='create_doctor'),
+    path('pharmacy-add', pharmacy.PharmacyCreateView.as_view(), name='create_pharmacy'),
+    path('partner-add', partner.PartnerCreateView.as_view(), name='create_partner'),
 ]

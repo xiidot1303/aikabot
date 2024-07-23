@@ -8,4 +8,9 @@ class VisitAdmin(admin.ModelAdmin):
     search_fields = ['address']
     list_filter = ('bot_user', 'type',)
 
+class DoctorAdmin(admin.ModelAdmin):
+    def get_list_display(self, request):
+        return [field.name for field in self.model._meta.concrete_fields]
+
 admin.site.register(Visit, VisitAdmin)
+admin.site.register(Doctor, DoctorAdmin)

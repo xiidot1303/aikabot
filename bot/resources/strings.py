@@ -103,23 +103,23 @@ lang_dict = {
 
     "comment": ["💬 Izoh", "💬 Комментарий"],
 
-    "": ["", ""],
+    "select doctor or add": ["", ""],
 
-    "": ["", ""],
+    "add doctor": ["", ""],
 
-    "": ["", ""],
+    "select pharmacy or add": ["", ""],
 
-    "": ["", ""],
+    "add pharmacy": ["", ""],
 
-    "": ["", ""],
+    "select partner or add": ["", ""],
 
-    "": ["", ""],
+    "add partner": ["", ""],
 
-    "": ["", ""],
+    "select doctor": ["", ""],
 
-    "": ["", ""],
+    "select pharmacy": ["", ""],
 
-    "": ["", ""],
+    "select partner": ["", ""],
 
     "": ["", ""],
 

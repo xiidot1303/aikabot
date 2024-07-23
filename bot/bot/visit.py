@@ -22,8 +22,29 @@ async def _to_the_getting_location(update: Update, context: CustomContext):
     return GET_VISIT_LOCATION
 
 async def _to_the_getting_address(update: Update, context: CustomContext):
-    markup = await build_keyboard(update, [], 2)
-    text = await get_word('type address', update)
+    visit_type = context.user_data['visit_type']
+    match visit_type:
+        case VISIT_TYPE.doctor:
+            text = await get_word('select doctor or add', update)
+            add_button_text = await get_word('add doctor', update)
+            search_button_text = await get_word('select doctor', update)
+        case VISIT_TYPE.pharmacy:
+            text = await get_word('select pharmacy or add', update)
+            add_button_text = await get_word('add pharmacy', update)
+            search_button_text = await get_word('select pharmacy', update)
+        case VISIT_TYPE.partners:
+            text = await get_word('select partner or add', update)
+            add_button_text = await get_word('add partner', update)
+            search_button_text = await get_word('select partner', update)
+        case _:
+            return
+    web_app_info = WebAppInfo(url=f"{WEBAPP_URL}/{visit_type}-add")
+    i_buttons = [
+        [InlineKeyboardButton(text=await get_word(search_button_text, update), switch_inline_query_current_chat="")],
+        [InlineKeyboardButton(text=await get_word(add_button_text, update), web_app=web_app_info)]
+    ]
+    
+    markup = InlineKeyboardMarkup(i_buttons)
     await update_message_reply_text(update, text, reply_markup=markup)
     return GET_VISIT_ADRESS
 
@@ -51,11 +72,11 @@ async def _to_the_confirming_visit(update: Update, context: CustomContext):
 async def get_visit_type(update: Update, context: CustomContext):
     visit_type = update.message.text
     if visit_type == await get_word('visit to the doctor', update):
-        type = 'doctor'
+        type = VISIT_TYPE.doctor
     elif visit_type == await get_word('visit to the pharmacy', update):
-        type = 'pharmacy'
+        type = VISIT_TYPE.pharmacy
     elif visit_type == await get_word('meeting with partners', update):
-        type = 'partners'
+        type = VISIT_TYPE.partners
     else:
         return
     

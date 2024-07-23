@@ -1,6 +1,11 @@
 from app.services import *
 from app.models import Visit
 
+class VISIT_TYPE:
+    doctor = "doctor"
+    pharmacy = "pharmacy"
+    partners = "partners"
+
 async def create_visit(bot_user, address, comment, type, lat, lon) -> Visit:
     obj = await Visit.objects.acreate(
         bot_user = bot_user, address = address,
