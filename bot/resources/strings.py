@@ -121,13 +121,22 @@ lang_dict = {
 
     "select partner": ["", ""],
 
-    "": ["", ""],
+    "not found": ["", ""],
 
-    "": ["", ""],
+    "confirming doctor": [
+        "", 
+        ""
+        ],
 
-    "": ["", ""],
+    "confirming pharmacy": [
+        "", 
+        ""
+        ],
 
-    "": ["", ""],
+    "confirming partner": [
+        "", 
+        ""
+        ],
 
     "": ["", ""],
 

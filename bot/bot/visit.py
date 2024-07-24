@@ -1,6 +1,8 @@
 from bot.bot import *
 from app.services.visit_service import *
-from app.services.visit_service import *
+from app.services.doctor_service import *
+from app.services.pharmacy_service import *
+from app.services.partner_service import *
 import asyncio
 from app.utils import get_address_by_coordinates
 
@@ -102,8 +104,19 @@ async def get_address(update: Update, context: CustomContext):
     if await is_message_back(update):
         return await _to_the_getting_location(update, context)
 
-    address = update.message.text
-    context.user_data['address'] = address
+    address, address_id = await split_text_and_text_id(update.message.text)
+    visit_type = context.user_data['visit_type']
+    match visit_type:
+        case VISIT_TYPE.doctor:
+            doctor: Doctor = await get_doctor_by_id(address_id)
+            context.user_data['doctor_id'] = doctor.id
+        case VISIT_TYPE.pharmacy:
+            pharmacy: Pharmacy = await get_pharmacy_by_id(address_id)
+            context.user_data['pharmacy_id'] = pharmacy.id
+        case VISIT_TYPE.partners:
+            partner: Partner = await get_partner_by_id(address_id)
+            context.user_data['partner_id'] = partner.id
+
     return await _to_the_getting_comment(update, context)
 
 @check_user
@@ -133,11 +146,24 @@ async def confirm_visit(update: Update, context: CustomContext):
     comment = context.user_data['comment']
     visit_type = context.user_data['visit_type']
     lat, lon = context.user_data['lat'], context.user_data['lon']
+    doctor, pharmacy, partner = (None, None, None)
+    match visit_type:
+        case VISIT_TYPE.doctor:
+            doctor_id = context.user_data['doctor_id']
+            doctor: Doctor = await get_doctor_by_id(doctor_id)
+        case VISIT_TYPE.pharmacy:
+            pharmacy_id = context.user_data['pharmacy_id']
+            pharmacy: Pharmacy = await get_pharmacy_by_id(pharmacy_id)
+        case VISIT_TYPE.partners:
+            partner_id = context.user_data['partner_id']
+            partner: Partner = await get_partner_by_id(partner_id)
+    # create visit address object
+    address: VisitAdress = await create_visit_address(doctor, pharmacy, partner)
     # create visit object
     visit_obj: Visit = await create_visit(bot_user, address, comment, visit_type, lat, lon)
     # set address to Visit by lat and lon
     context.job_queue.run_once(set_location_of_visit, 0, data=(lat,lon, visit_obj.id), chat_id=update.effective_message.chat_id)
-
+    
     await update.callback_query.edit_message_reply_markup(reply_markup=None)
     await main_menu(update, context)
     return ConversationHandler.END
