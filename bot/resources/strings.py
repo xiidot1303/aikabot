@@ -72,8 +72,6 @@ lang_dict = {
         "Пожалуйста, выберите тип визита"
         ],
 
-    "type address": ["", ""],
-
     "type comment": ["Uchrashuv haqida izohlaringizni qoldiring.", "Введите комментарий о встрече."],
 
     "send live location": [
@@ -103,25 +101,58 @@ lang_dict = {
 
     "comment": ["💬 Izoh", "💬 Комментарий"],
 
-    "select doctor or add": ["", ""],
+    "select doctor or add": [
+        "<b>🔍 Shifokor qidirish</b>\n\n" \
+            "<code>«Shifokor tanlash»</code> tugmasini bosing, shifokor ismini kiriting va berilgan ro'yxatdan kerakli natijani tanlang.\n\n" \
+            "Agarda siz qidirayotgan shifokor qidiruv orqali ro'yxatda chiqmasa, " \
+                "<code>«Shifokor qo'shish»</code> tugmasini bosing va yangi shifokor ma'lumotlarini kiriting.",
 
-    "add doctor": ["", ""],
+        "<b>🔍 Поиск врача</b>\n\n" \
+            "Нажмите кнопку <code>«Выбрать врача»</code>, введите имя врача и выберите результат из списка.\n\n" \
+                "Если нужный вам врач не появился в списке через поиск, нажмите кнопку " \
+                    "<code>«Добавить врача»</code> и введите информацию о новом враче.",
+        ],
 
-    "select pharmacy or add": ["", ""],
+    "add doctor": ["Shifokor qo'shish", "Добавить врача"],
 
-    "add pharmacy": ["", ""],
+    "select pharmacy or add": [
+        "<b>🔍 Dorixona qidirish</b>\n\n" \
+            "<code>«Dorixona tanlash»</code> tugmasini bosing, dorixona nomini kiriting va berilgan ro'yxatdan kerakli natijani tanlang.\n\n" \
+                "Agarda siz qidirayotgan dorixona qidiruv orqali ro'yxatda chiqmasa, " \
+                    "<code>«Dorixona qo'shish»</code> tugmasini bosing va yangi dorixona ma'lumotlarini kiriting.", 
+                    
+        "<b>🔍 Поиск аптеки</b>\n\n" \
+            "Нажмите кнопку <code>«Выбрать аптеку»</code>, введите название аптеки и выберите результат из списка.\n\n" \
+                "Если нужный вам аптека не появился в списке через поиск, " \
+                    "нажмите кнопку <code>«Добавить аптеку»</code> и введите информацию о новом аптеке.",
+        ],
 
-    "select partner or add": ["", ""],
+    "add pharmacy": ["Dorixona qo'shish", "Добавить аптеку"],
 
-    "add partner": ["", ""],
+    "select partner or add": [
+        "<b>🔍 Hamkor qidirish</b>\n\n" \
+            "<code>«Hamkor tanlash»</code> tugmasini bosing, hamkor ismini kiriting va berilgan ro'yxatdan kerakli natijani tanlang.\n\n" \
+                "Agarda siz qidirayotgan hamkor qidiruv orqali ro'yxatda chiqmasa, " \
+                    "<code>«Hamkor qo'shish»</code> tugmasini bosing va yangi hamkor ma'lumotlarini kiriting.", 
 
-    "select doctor": ["", ""],
+        "<b>🔍 Поиск партнера</b>\n\n" \
+            "Нажмите кнопку <code>«Выбрать партнера»</code>, введите имя партнера и выберите результат из списка.\n\n" \
+                "Если нужный вам партнер не появился в списке через поиск, " \
+                    "нажмите кнопку <code>«Добавить партнера»</code> и введите информацию о новом партнере.",
+        ],
 
-    "select pharmacy": ["", ""],
+    "add partner": ["Hamkor qo'shish", "Добавить партнера"],
 
-    "select partner": ["", ""],
+    "select doctor": ["Shifokor tanlash", "Выбрать врача"],
 
-    "not found": ["", ""],
+    "select pharmacy": ["Dorixona tanlash", "Выбрать аптеку"],
+
+    "select partner": ["Hamkor tanlash", "Выбрать партнера"],
+
+    "not found": [
+        "❌ Hech qanday ma'lumot topilmadi", 
+        "❌ Не найдено"
+        ],
 
     "confirming doctor": [
         "", 
