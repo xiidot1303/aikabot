@@ -142,7 +142,6 @@ async def confirm_visit(update: Update, context: CustomContext):
     
     # get all attributes
     bot_user = await get_user_by_update(update)
-    address = context.user_data['address']
     comment = context.user_data['comment']
     visit_type = context.user_data['visit_type']
     lat, lon = context.user_data['lat'], context.user_data['lon']
