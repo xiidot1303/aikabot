@@ -12,5 +12,16 @@ class DoctorAdmin(admin.ModelAdmin):
     def get_list_display(self, request):
         return [field.name for field in self.model._meta.concrete_fields]
 
+class PharmacyAdmin(admin.ModelAdmin):
+    def get_list_display(self, request):
+        return [field.name for field in self.model._meta.concrete_fields]
+
+class PartnerAdmin(admin.ModelAdmin):
+    def get_list_display(self, request):
+        return [field.name for field in self.model._meta.concrete_fields]
+
+
 admin.site.register(Visit, VisitAdmin)
 admin.site.register(Doctor, DoctorAdmin)
+admin.site.register(Pharmacy, PharmacyAdmin)
+admin.site.register(Partner, PartnerAdmin)
