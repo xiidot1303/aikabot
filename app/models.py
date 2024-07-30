@@ -29,6 +29,12 @@ class VisitAdress(models.Model):
     pharmacy = models.ForeignKey('app.Pharmacy', null=True, blank=True, on_delete=models.CASCADE)
     partner = models.ForeignKey('app.Partner', null=True, blank=True, on_delete=models.CASCADE)
 
+    def __str__(self) -> str:
+        r = None
+        r = self.doctor.name if self.doctor else r
+        r = self.pharmacy.title if self.pharmacy else r
+        r = self.partner.name if self.partner else r
+        return r
 
 class Doctor(models.Model):
     name = models.CharField(null=True, blank=False, max_length=255, verbose_name="Имя")
