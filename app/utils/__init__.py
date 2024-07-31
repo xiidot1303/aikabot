@@ -48,3 +48,6 @@ async def get_address_by_coordinates(lat, lon):
     client = Client(YANDEX_API_KEY)
     address = client.address(Decimal(lon), Decimal(lat))
     return address
+
+async def generate_google_map_link(latitude, longitude):
+    return f"https://www.google.com/maps?q={latitude},{longitude}"

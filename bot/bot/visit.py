@@ -42,8 +42,8 @@ async def _to_the_getting_address(update: Update, context: CustomContext):
             return
     web_app_info = WebAppInfo(url=f"{WEBAPP_URL}/{visit_type}-add")
     i_buttons = [
-        [InlineKeyboardButton(text=await get_word(search_button_text, update), switch_inline_query_current_chat="")],
-        [InlineKeyboardButton(text=await get_word(add_button_text, update), web_app=web_app_info)]
+        [InlineKeyboardButton(text=search_button_text, switch_inline_query_current_chat="")],
+        [InlineKeyboardButton(text=add_button_text, web_app=web_app_info)]
     ]
     
     markup = InlineKeyboardMarkup(i_buttons)
@@ -142,7 +142,6 @@ async def confirm_visit(update: Update, context: CustomContext):
     
     # get all attributes
     bot_user = await get_user_by_update(update)
-    address = context.user_data['address']
     comment = context.user_data['comment']
     visit_type = context.user_data['visit_type']
     lat, lon = context.user_data['lat'], context.user_data['lon']
