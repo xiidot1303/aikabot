@@ -50,6 +50,12 @@ async def _to_the_getting_address(update: Update, context: CustomContext):
     await update_message_reply_text(update, text, reply_markup=markup)
     return GET_VISIT_ADRESS
 
+async def _to_the_getting_video_note(update: Update, context: CustomContext):
+    text = await get_word('send video note', update)
+    markup = await build_keyboard(update, [], 2)
+    await update_message_reply_text(update, text, reply_markup=markup)
+    return GET_VIDEO_NOTE
+
 async def _to_the_getting_comment(update: Update, context: CustomContext):
     markup = await build_keyboard(update, [], 2)
     text = await get_word('type comment', update)
@@ -117,12 +123,31 @@ async def get_address(update: Update, context: CustomContext):
             partner: Partner = await get_partner_by_id(address_id)
             context.user_data['partner_id'] = partner.id
 
+    return await _to_the_getting_video_note(update, context)
+
+@check_user
+async def get_video_note(update: Update, context: CustomContext):
+    if await is_message_back(update):
+        return await _to_the_getting_address(update, context)
+
+    video_note = update.message.video_note
+    file_id = video_note.file_id
+    new_file = await context.bot.get_file(file_id)
+    output_directory = 'files/visit/video'
+    # Ensure the directory exists
+    if not os.path.exists(output_directory):
+        os.makedirs(output_directory)
+    file_path = os.path.join(output_directory, f'{file_id}.mp4')
+    await new_file.download_to_drive(file_path)
+    # save video and video note to user data
+    context.user_data['video'] = file_path.replace('files/', '')
+    context.user_data['video_note'] = file_id
     return await _to_the_getting_comment(update, context)
 
 @check_user
 async def get_comment(update: Update, context: CustomContext):
     if await is_message_back(update):
-        return await _to_the_getting_address(update, context)
+        return await _to_the_getting_video_note(update, context)
     
     comment = update.message.text
     context.user_data['comment'] = comment
@@ -145,6 +170,8 @@ async def confirm_visit(update: Update, context: CustomContext):
     comment = context.user_data['comment']
     visit_type = context.user_data['visit_type']
     lat, lon = context.user_data['lat'], context.user_data['lon']
+    video = context.user_data['video']
+    video_note = context.user_data['video_note']
     doctor, pharmacy, partner = (None, None, None)
     match visit_type:
         case VISIT_TYPE.doctor:
@@ -159,7 +186,7 @@ async def confirm_visit(update: Update, context: CustomContext):
     # create visit address object
     address: VisitAdress = await create_visit_address(doctor, pharmacy, partner)
     # create visit object
-    visit_obj: Visit = await create_visit(bot_user, address, comment, visit_type, lat, lon)
+    visit_obj: Visit = await create_visit(bot_user, address, comment, visit_type, lat, lon, video, video_note)
     # set address to Visit by lat and lon
     context.job_queue.run_once(set_location_of_visit, 0, data=(lat,lon, visit_obj.id), chat_id=update.effective_message.chat_id)
     

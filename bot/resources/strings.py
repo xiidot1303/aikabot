@@ -169,7 +169,12 @@ lang_dict = {
         ""
         ],
 
-    "": ["", ""],
+    "send video note": [
+        "<b>Aylana video xabar yuboring.</b>\n\n" \
+            "Videoda, tashrif manzili, sana va vaqtni aytib o'ting", 
+        "<b>Отправляйте круговое видео</b>\n\n" \
+            "В видео расскажите об адресе визита, дате и времени."
+        ],
 
     "": ["", ""],
 

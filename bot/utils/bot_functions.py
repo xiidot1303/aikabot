@@ -172,7 +172,7 @@ async def inlinequeryresultarticle(title, description=None, title_id=None):
     return article
 
 async def update_inline_query_answer(update: Update, article):
-    await update.inline_query.answer(article, auto_pagination=True, cache_time=120)
+    await update.inline_query.answer(article, auto_pagination=True, cache_time=10)
 
 async def bot_answer_callback_query(update: Update, context: ContextTypes.DEFAULT_TYPE, text, show_alert=True):
     bot = context.bot

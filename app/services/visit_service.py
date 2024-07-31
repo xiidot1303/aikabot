@@ -6,10 +6,11 @@ class VISIT_TYPE:
     pharmacy = "pharmacy"
     partners = "partners"
 
-async def create_visit(bot_user, address, comment, type, lat, lon) -> Visit:
+async def create_visit(bot_user, address, comment, type, lat, lon, video, video_note) -> Visit:
     obj = await Visit.objects.acreate(
         bot_user = bot_user, address = address,
-        comment = comment, type = type, lat = lat, lon = lon
+        comment = comment, type = type, lat = lat, lon = lon,
+        video = video, video_note = video_note
     )
     return obj
 

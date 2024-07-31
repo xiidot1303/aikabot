@@ -15,6 +15,8 @@ class Visit(models.Model):
     lat = models.CharField(null=True, blank=True, max_length=16)
     lon = models.CharField(null=True, blank=True, max_length=16)
     location = models.CharField(null=True, blank=True, max_length=255, verbose_name='Расположение')
+    video = models.FileField(null=True, blank=True, upload_to="visit/video/", verbose_name="Видео")
+    video_note = models.CharField(null=True, blank=True, max_length=255, verbose_name='Круговое видео')
     
     @sync_to_async
     def get_bot_user(self):
@@ -38,6 +40,8 @@ class VisitAdress(models.Model):
 
 class Doctor(models.Model):
     name = models.CharField(null=True, blank=False, max_length=255, verbose_name="Имя")
+    contact = models.CharField(null=True, blank=False, max_length=32, verbose_name="Контакты")
+    direction = models.CharField(null=True, blank=False, max_length=32, verbose_name="Направление")
     workplace = models.CharField(null=True, blank=True, max_length=255, verbose_name="Место работы")
 
     class Meta:
@@ -46,7 +50,9 @@ class Doctor(models.Model):
 
 
 class Pharmacy(models.Model):
-    title = models.CharField(null=True, blank=False, max_length=255, verbose_name="Название")
+    title = models.CharField(null=True, blank=False, max_length=255, verbose_name="Юридическое название")
+    name = models.CharField(null=True, blank=False, max_length=255, verbose_name="ФИО фармацевта")
+    contact = models.CharField(null=True, blank=False, max_length=32, verbose_name="Контакты")
     address = models.CharField(null=True, blank=True, max_length=255, verbose_name="Адрес")
 
     class Meta:
