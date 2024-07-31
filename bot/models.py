@@ -9,7 +9,7 @@ class Bot_user(models.Model):
     phone = models.CharField(null=True, blank=True, max_length=16, default='', verbose_name='Телефон')
     lang = models.CharField(null=True, blank=True, max_length=4, default='uz', verbose_name='')
     date = models.DateTimeField(db_index=True, null=True, auto_now_add=True, blank=True, verbose_name='Дата регистрации')
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True, verbose_name='Активен?')
 
     def __str__(self) -> str:
         try:
