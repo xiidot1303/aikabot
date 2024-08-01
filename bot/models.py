@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
+from asgiref.sync import sync_to_async
 
 class Bot_user(models.Model):
     user_id = models.BigIntegerField(null=True)
@@ -17,6 +18,10 @@ class Bot_user(models.Model):
             return self.name + ' ' + str(self.phone)
         except:
             return super().__str__()
+
+    @sync_to_async
+    def get_region(self):
+        return self.region
 
     class Meta:
         verbose_name = "Пользователь бота"

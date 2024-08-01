@@ -7,16 +7,17 @@ from app.services.partner_service import filter_partners_by_name
 async def get_visit_address(update: Update, context: CustomContext):
     chat_id = update.effective_user.id
     text = update.inline_query.query
+    bot_user: Bot_user = await get_user_by_update(update)
     # get visit_type from user data
     visit_type = context.user_data['visit_type']
     # set values list and decription attribute
     match visit_type:
         case VISIT_TYPE.doctor:
-            values_list = await filter_doctors_by_name(text)
+            values_list = await filter_doctors_by_name(text, await bot_user.get_region())
             title_attr = 'name'
             desc_attr = 'workplace'
         case VISIT_TYPE.pharmacy:
-            values_list = await filter_pharmacies_by_title(text)
+            values_list = await filter_pharmacies_by_title(text, await bot_user.get_region())
             title_attr = 'title'
             desc_attr = 'address'
         case VISIT_TYPE.partners:
