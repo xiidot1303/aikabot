@@ -73,6 +73,12 @@ class JoinLinkAdmin(admin.ModelAdmin):
     list_display = ['bot_user', 'link', 'is_used', 'used_date']
     list_display_links = None
 
+
+class RegionAdmin(admin.ModelAdmin):
+    def get_list_display(self, request):
+        return [field.name for field in self.model._meta.concrete_fields]
+
 admin.site.register(Bot_user, Bot_userAdmin)
 admin.site.register(Message, MesageAdmin)
 admin.site.register(JoinLink, JoinLinkAdmin)
+admin.site.register(Region, RegionAdmin)

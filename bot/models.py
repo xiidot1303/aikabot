@@ -9,6 +9,7 @@ class Bot_user(models.Model):
     phone = models.CharField(null=True, blank=True, max_length=16, default='', verbose_name='Телефон')
     lang = models.CharField(null=True, blank=True, max_length=4, default='uz', verbose_name='')
     date = models.DateTimeField(db_index=True, null=True, auto_now_add=True, blank=True, verbose_name='Дата регистрации')
+    region = models.ForeignKey('bot.Region', null=True, blank=True, on_delete=models.PROTECT, verbose_name='Район')
     is_active = models.BooleanField(default=True, verbose_name='Активен?')
 
     def __str__(self) -> str:
@@ -49,3 +50,13 @@ class JoinLink(models.Model):
     class Meta:
         verbose_name = "Ссылка на приглашение"
         verbose_name_plural = "Ссылки для приглашений"
+
+class Region(models.Model):
+    title = models.CharField(null=True, blank=False, max_length=255, verbose_name='Название региона')
+
+    class Meta:
+        verbose_name = "Район"
+        verbose_name_plural = "Районы"
+    
+    def __str__(self) -> str:
+        return self.title

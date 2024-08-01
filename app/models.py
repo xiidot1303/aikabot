@@ -51,6 +51,7 @@ class Doctor(models.Model):
     contact = models.CharField(null=True, blank=False, max_length=32, verbose_name="Контакты")
     direction = models.CharField(null=True, blank=False, max_length=32, verbose_name="Направление")
     workplace = models.CharField(null=True, blank=True, max_length=255, verbose_name="Место работы")
+    region = models.ForeignKey('bot.Region', null=True, blank=True, on_delete=models.PROTECT, verbose_name='Район')
 
     class Meta:
         verbose_name = "Врач"
@@ -62,6 +63,7 @@ class Pharmacy(models.Model):
     name = models.CharField(null=True, blank=False, max_length=255, verbose_name="ФИО фармацевта")
     contact = models.CharField(null=True, blank=False, max_length=32, verbose_name="Контакты")
     address = models.CharField(null=True, blank=True, max_length=255, verbose_name="Адрес")
+    region = models.ForeignKey('bot.Region', null=True, blank=True, on_delete=models.PROTECT, verbose_name='Район')
 
     class Meta:
         verbose_name = "Аптека"
