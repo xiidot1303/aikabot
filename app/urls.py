@@ -30,5 +30,5 @@ urlpatterns = [
     # doctor
     path('doctor-add', doctor.DoctorCreateView.as_view(), name='create_doctor'),
     path('pharmacy-add', pharmacy.PharmacyCreateView.as_view(), name='create_pharmacy'),
-    path('partner-add', partner.PartnerCreateView.as_view(), name='create_partner'),
+    path('partners-add', partner.PartnerCreateView.as_view(), name='create_partner'),
 ]
