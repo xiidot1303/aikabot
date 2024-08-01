@@ -36,7 +36,8 @@ async def new_visit_info_string(visit: Visit):
         case VISIT_TYPE.doctor:
             doctor: Doctor = await visit.get_address()
             heading = lang_dict["new visit to the doctor"][1]
-            text = f"<b>{heading}</b>\n\n🕔 {visit.datetime.strftime("%d.%m.%Y %H:%M:%S")}\n" \
+            visit_datetime = visit.datetime.strftime("%d.%m.%Y %H:%M:%S")
+            text = f"<b>{heading}</b>\n\n🕔 {visit_datetime}\n" \
                 f"👤 {(await visit.get_bot_user()).name}\n📞 {(await visit.get_bot_user()).phone}\n\n" \
                     f"{Doctor._meta.get_field('name').verbose_name}: {doctor.name}\n" \
                         f"{Doctor._meta.get_field('contact').verbose_name}: {doctor.contact}\n" \
@@ -46,7 +47,8 @@ async def new_visit_info_string(visit: Visit):
         case VISIT_TYPE.pharmacy:
             heading = lang_dict["new visit to the pharmacy"][1]
             pharmacy: Pharmacy = await visit.get_address()
-            text = f"<b>{heading}</b>\n\n🕔 {visit.datetime.strftime("%d.%m.%Y %H:%M:%S")}\n" \
+            visit_datetime = visit.datetime.strftime("%d.%m.%Y %H:%M:%S")
+            text = f"<b>{heading}</b>\n\n🕔 {visit_datetime}\n" \
                 f"👤 {(await visit.get_bot_user()).name}\n📞 {(await visit.get_bot_user()).phone}\n\n" \
                     f"{Pharmacy._meta.get_field('name').verbose_name}: {pharmacy.name}\n" \
                         f"{Pharmacy._meta.get_field('contact').verbose_name}: {pharmacy.contact}\n" \
