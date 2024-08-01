@@ -22,6 +22,14 @@ class Visit(models.Model):
     def get_bot_user(self):
         return self.bot_user
     
+    @sync_to_async
+    def get_address(self):
+        r = None
+        r = self.address.doctor if self.address.doctor else r
+        r = self.address.pharmacy if self.address.pharmacy else r
+        r = self.address.partner if self.address.partner else r
+        return r
+    
     class Meta:
         verbose_name = "Посещение"
         verbose_name_plural = "Посещения"
@@ -39,7 +47,7 @@ class VisitAdress(models.Model):
         return r
 
 class Doctor(models.Model):
-    name = models.CharField(null=True, blank=False, max_length=255, verbose_name="Имя")
+    name = models.CharField(null=True, blank=False, max_length=255, verbose_name="ФИО врача")
     contact = models.CharField(null=True, blank=False, max_length=32, verbose_name="Контакты")
     direction = models.CharField(null=True, blank=False, max_length=32, verbose_name="Направление")
     workplace = models.CharField(null=True, blank=True, max_length=255, verbose_name="Место работы")

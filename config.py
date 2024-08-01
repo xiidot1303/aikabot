@@ -20,6 +20,6 @@ DB_PASSWORD = os.environ.get("DB_PASSWORD")
 BOT_API_TOKEN = os.environ.get("BOT_API_TOKEN")
 WEBHOOK_URL = os.environ.get("WEBHOOK_URL")
 WEBAPP_URL = os.environ.get("WEBAPP_URL")
-
+REPORT_GROUP_ID = os.environ.get("REPORT_GROUP_ID")
 
 YANDEX_API_KEY = os.environ.get("YANDEX_API_KEY")

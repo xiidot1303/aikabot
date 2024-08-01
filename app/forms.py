@@ -21,8 +21,10 @@ class PharmacyForm(ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'address': forms.TextInput(attrs={'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'contact': forms.TextInput(attrs={'class': 'form-control'}),
         }
-        
+
     field_order = ['title', 'name', 'contact', 'address']
 
 class PartnerForm(ModelForm):

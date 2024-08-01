@@ -5,6 +5,7 @@ from app.services.pharmacy_service import *
 from app.services.partner_service import *
 import asyncio
 from app.utils import get_address_by_coordinates
+from bot.services.notification_service import send_visit_summary_notify
 
 async def _to_the_getting_visit_type(update: Update, context: CustomContext):
     buttons = [
@@ -189,7 +190,7 @@ async def confirm_visit(update: Update, context: CustomContext):
     visit_obj: Visit = await create_visit(bot_user, address, comment, visit_type, lat, lon, video, video_note)
     # set address to Visit by lat and lon
     context.job_queue.run_once(set_location_of_visit, 0, data=(lat,lon, visit_obj.id), chat_id=update.effective_message.chat_id)
-    
+    context.job_queue.run_once(send_visit_info_to_group, 0, data = visit_obj.id)
     await update.callback_query.edit_message_reply_markup(reply_markup=None)
     await main_menu(update, context)
     return ConversationHandler.END
@@ -201,6 +202,13 @@ async def set_location_of_visit(context: CustomContext):
     address = await get_address_by_coordinates(lat, lon)
     visit.location = address
     await visit.asave()
+
+async def send_visit_info_to_group(context: CustomContext):
+    job = context.job
+    visit_id = job.data
+    visit: Visit = await get_visit_by_id(visit_id)
+    # send notification
+    await send_visit_summary_notify(visit)
 
 async def start(update: Update, context: CustomContext):
     await main_menu(update, context)

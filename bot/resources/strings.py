@@ -65,6 +65,12 @@ lang_dict = {
 
     "meeting with partners": ["👥 Hamkorlar bilan uchrashuv", "👥 Встреча с партнерами"],
 
+    "new visit to the doctor": ["👨🏻‍⚕️", "🆕 Новый визит к врачу"],
+
+    "new visit to the pharmacy": ["💊", "🆕 Новый визит в аптеку"],
+
+    "new meeting with partners": ["👥", "🆕 Новая встреча с партнерами"],
+
     "create visit": ["📝 Tashrif yaratish", "📝 Запись визита"],
 
     "select type of visit": [
