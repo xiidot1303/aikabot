@@ -18,12 +18,14 @@ from telegram.constants import (
 )
 from telegram.ext import (
     ConversationHandler,
-    ContextTypes
+    ContextTypes,
+    Application
 )
 from uuid import uuid4
 from config import BOT_API_TOKEN
 
-bot = Bot(BOT_API_TOKEN)
+application: Application = Application.builder().token(BOT_API_TOKEN).build()
+bot: Bot = application.bot
 
 async def update_message_reply_text(update: Update, text, reply_markup=None, disable_web_page_preview = True):
     message = await update.effective_message.reply_text(
@@ -172,7 +174,7 @@ async def inlinequeryresultarticle(title, description=None, title_id=None):
     return article
 
 async def update_inline_query_answer(update: Update, article):
-    await update.inline_query.answer(article, auto_pagination=True, cache_time=120)
+    await update.inline_query.answer(article, auto_pagination=True, cache_time=10)
 
 async def bot_answer_callback_query(update: Update, context: ContextTypes.DEFAULT_TYPE, text, show_alert=True):
     bot = context.bot

@@ -54,6 +54,9 @@ visit_handler = ConversationHandler(
         GET_VISIT_ADRESS: [
             MessageHandler(filters.TEXT & exceptions_for_filter_text, visit.get_address),
         ],
+        GET_VIDEO_NOTE: [
+            MessageHandler(filters.VIDEO_NOTE | filters.Text(lang_dict['back']), visit.get_video_note),
+        ],
         GET_VISIT_COMMENT: [
             MessageHandler(filters.TEXT & exceptions_for_filter_text, visit.get_comment)
         ],

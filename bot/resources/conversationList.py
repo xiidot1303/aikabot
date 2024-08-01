@@ -1,4 +1,4 @@
-n = 13
+n = 14
 (
     GET_LANG,
     GET_NAME,
@@ -13,6 +13,7 @@ n = 13
     GET_VISIT_COMMENT,
     GET_VISIT_LOCATION,
     CONFIRM_VISIT,
+    GET_VIDEO_NOTE,
 
 
 ) = range(0, n)
