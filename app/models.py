@@ -55,3 +55,7 @@ class Pharmacy(models.Model):
     
 class Partner(models.Model):
     name = models.CharField(null=True, blank=False, max_length=255, verbose_name="Имя")
+
+    class Meta:
+        verbose_name = "Партнер"
+        verbose_name_plural = "Партнеры"
