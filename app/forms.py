@@ -13,21 +13,23 @@ class DoctorForm(ModelForm):
             'contact': forms.TextInput(attrs={'class': 'form-control'}),
             'region': forms.Select(attrs={'class': 'form-control'})
         }
-    field_order = ['name', 'contact', 'direction', 'workplace', 'region']
+    field_order = ['region', 'name', 'contact', 'direction', 'workplace']
 
 class PharmacyForm(ModelForm):
     class Meta:
         model = Pharmacy
-        fields = ['title', 'name', 'contact', 'address', 'region']
+        fields = ['title', 'name', 'name2', 'responsible', 'contact', 'responsible_contact', 'region']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'address': forms.TextInput(attrs={'class': 'form-control'}),
             'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'name2': forms.TextInput(attrs={'class': 'form-control'}),
+            'responsible': forms.TextInput(attrs={'class': 'form-control'}),
             'contact': forms.TextInput(attrs={'class': 'form-control'}),
+            'responsible_contact': forms.TextInput(attrs={'class': 'form-control'}),
             'region': forms.Select(attrs={'class': 'form-control'})
         }
 
-    field_order = ['title', 'name', 'contact', 'address', 'region']
+    field_order = ['region', 'title', 'name', 'name2', 'responsible', 'contact', 'responsible_contact']
 
 class PartnerForm(ModelForm):
     class Meta:

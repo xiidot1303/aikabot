@@ -19,7 +19,7 @@ async def get_visit_address(update: Update, context: CustomContext):
         case VISIT_TYPE.pharmacy:
             values_list = await filter_pharmacies_by_title(text, await bot_user.get_regions())
             title_attr = 'title'
-            desc_attr = 'address'
+            desc_attr = 'contact'
         case VISIT_TYPE.partners:
             values_list = await filter_partners_by_name(text)
             title_attr = 'name'

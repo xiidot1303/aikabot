@@ -20,7 +20,7 @@ async def confirm_visit_string(update, data):
             pharmacy: Pharmacy = await get_pharmacy_by_id(pharmacy_id)
             text = f"<b>{await get_word('visit to the pharmacy', update)}</b>\n\n" \
                 f"{Pharmacy._meta.get_field('title').verbose_name}: <i>{pharmacy.title}</i>\n" \
-                    f"{Pharmacy._meta.get_field('address').verbose_name}: <i>{pharmacy.address}</i>\n\n"
+                    f"{Pharmacy._meta.get_field('name').verbose_name}: <i>{pharmacy.name}</i>\n\n"
 
         case VISIT_TYPE.partners:
             partner_id = data['partner_id']
@@ -50,10 +50,13 @@ async def new_visit_info_string(visit: Visit):
             visit_datetime = visit.datetime.strftime("%d.%m.%Y %H:%M:%S")
             text = f"<b>{heading}</b>\n\n🕔 {visit_datetime}\n" \
                 f"👤 {(await visit.get_bot_user()).name}\n📞 {(await visit.get_bot_user()).phone}\n\n" \
+                    f"{Pharmacy._meta.get_field('responsible').verbose_name}: {pharmacy.responsible}\n" \
+                    f"{Pharmacy._meta.get_field('responsible_contact').verbose_name}: {pharmacy.responsible_contact}\n" \
                     f"{Pharmacy._meta.get_field('name').verbose_name}: {pharmacy.name}\n" \
+                    f"{Pharmacy._meta.get_field('name2').verbose_name}: {pharmacy.name2}\n" \
                         f"{Pharmacy._meta.get_field('contact').verbose_name}: {pharmacy.contact}\n" \
                             f"{Pharmacy._meta.get_field('title').verbose_name}: {pharmacy.title}\n" \
-                                f"{Pharmacy._meta.get_field('address').verbose_name}: {pharmacy.address}\n" \
+
 
         case VISIT_TYPE.partners:
             heading = lang_dict["new meeting with partners"][1]
