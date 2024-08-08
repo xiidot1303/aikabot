@@ -15,7 +15,7 @@ async def export_visits_view(request):
     # Записываем данные
     async for visit in visits_all():
         ws.append([
-            (await visit.get_bot_user()).name, visit.address, visit.comment, 
+            (await visit.get_bot_user()).name, await visit.get_address_str(), visit.comment, 
             visit.datetime.strftime("%d.%m.%Y %H:%M"), visit.get_type_display(), visit.location
             ])
 

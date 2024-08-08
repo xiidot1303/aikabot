@@ -29,7 +29,11 @@ class Visit(models.Model):
         r = self.address.pharmacy if self.address.pharmacy else r
         r = self.address.partner if self.address.partner else r
         return r
-    
+
+    @sync_to_async
+    def get_address_str(self):
+        return self.address.__str__()
+
     class Meta:
         verbose_name = "Посещение"
         verbose_name_plural = "Посещения"
