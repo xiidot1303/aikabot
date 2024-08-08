@@ -71,7 +71,7 @@ async def new_visit_info_string(visit: Visit):
             text = f"<b>{heading}</b>\n\n🕔 {visit_datetime}\n" \
                 f"👤 {(await visit.get_bot_user()).name}\n📞 {(await visit.get_bot_user()).phone}\n\n" \
                     f"{Partner._meta.get_field('name').verbose_name}: {partner.name}\n"
-    text += f"{lang_dict['comment'][0]}: {visit.comment}\n\n"
+    text += f"{lang_dict['comment'][1]}: {visit.comment}\n\n"
     map_link = await generate_google_map_link(visit.lat, visit.lon)
     location_text = visit.location if visit.location else map_link
     text += f"<a href='{map_link}'>{location_text}</a>"

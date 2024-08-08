@@ -105,7 +105,7 @@ lang_dict = {
 
     "visit is completed": ["✅ Tashrif muvaffaqiyatli yaratildi", "✅ Запись успешно создана"],
 
-    "comment": ["💬 Izoh", "💬 Комментарий"],
+    "comment": ["Izoh", "Комментарий"],
 
     "select doctor or add": [
         "<b>🔍 Shifokor qidirish</b>\n\n" \
