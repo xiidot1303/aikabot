@@ -15,7 +15,7 @@ async def confirm_visit_string(update, data):
                     f"{Doctor._meta.get_field('name').verbose_name}: {doctor.name}\n" \
                         f"{Doctor._meta.get_field('contact').verbose_name}: {doctor.contact}\n" \
                             f"{Doctor._meta.get_field('direction').verbose_name}: {doctor.direction}\n" \
-                                f"{Doctor._meta.get_field('workplace').verbose_name}: {doctor.workplace}\n\n"
+                                f"{Doctor._meta.get_field('workplace').verbose_name}: {doctor.workplace}\n"
 
         case VISIT_TYPE.pharmacy:
             pharmacy_id = data['pharmacy_id']
@@ -32,8 +32,8 @@ async def confirm_visit_string(update, data):
             partner_id = data['partner_id']
             partner: Partner = await get_partner_by_id(partner_id)
             text = f"<b>{await get_word('meeting with partners', update)}</b>\n\n" \
-                f"{Partner._meta.get_field('name').verbose_name}: <i>{partner.name}</i>\n\n"
-
+                f"{Partner._meta.get_field('name').verbose_name}: <i>{partner.name}</i>\n"
+    text += f"{await get_word('comment', update)}: {data['comment']}\n\n"
     text += f"<b>{await get_word('confirm visit?', update)}</b>"
     return text
 
@@ -48,7 +48,7 @@ async def new_visit_info_string(visit: Visit):
                     f"{Doctor._meta.get_field('name').verbose_name}: {doctor.name}\n" \
                         f"{Doctor._meta.get_field('contact').verbose_name}: {doctor.contact}\n" \
                             f"{Doctor._meta.get_field('direction').verbose_name}: {doctor.direction}\n" \
-                                f"{Doctor._meta.get_field('workplace').verbose_name}: {doctor.workplace}\n\n"
+                                f"{Doctor._meta.get_field('workplace').verbose_name}: {doctor.workplace}\n"
 
         case VISIT_TYPE.pharmacy:
             heading = lang_dict["new visit to the pharmacy"][1]
@@ -71,7 +71,7 @@ async def new_visit_info_string(visit: Visit):
             text = f"<b>{heading}</b>\n\n🕔 {visit_datetime}\n" \
                 f"👤 {(await visit.get_bot_user()).name}\n📞 {(await visit.get_bot_user()).phone}\n\n" \
                     f"{Partner._meta.get_field('name').verbose_name}: {partner.name}\n"
-    
+    text += f"{lang_dict['comment'][0]}: {visit.comment}\n\n"
     map_link = await generate_google_map_link(visit.lat, visit.lon)
     location_text = visit.location if visit.location else map_link
     text += f"<a href='{map_link}'>{location_text}</a>"
