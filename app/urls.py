@@ -29,6 +29,14 @@ urlpatterns = [
     path('successfully-created', main.successfully_created, name='successfully_created'),
     # doctor
     path('doctor-add', doctor.DoctorCreateView.as_view(), name='create_doctor'),
+    path('export-doctors', doctor.export_doctors_view, name='export_doctors'),
+
+    # pharmacy
     path('pharmacy-add', pharmacy.PharmacyCreateView.as_view(), name='create_pharmacy'),
+    path('export-pharmacies', pharmacy.export_pharmacies_to_excel, name='export_pharmacies'),
+
+    # partner
     path('partners-add', partner.PartnerCreateView.as_view(), name='create_partner'),
+    path('export-partners', partner.export_partners_to_excel, name='export_partners'),
+
 ]

@@ -1,0 +1,6 @@
+{% extends "admin/change_list.html" %}
+
+{% block object-tools-items %}
+  <a href="{% url 'export_pharmacies' %}" class="button btn btn-secondary" style="margin-left: 10px;">Загрузить в excel</a>
+  {{ block.super }}
+{% endblock %}

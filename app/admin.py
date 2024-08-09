@@ -19,14 +19,17 @@ class VisitAdmin(admin.ModelAdmin):
 
 
 class DoctorAdmin(admin.ModelAdmin):
+    change_list_template = 'admin/doctor/doctor_change_list.html'
     def get_list_display(self, request):
         return [field.name for field in self.model._meta.concrete_fields]
 
 class PharmacyAdmin(admin.ModelAdmin):
+    change_list_template = 'admin/pharmacy/pharmacy_change_list.html'
     def get_list_display(self, request):
         return [field.name for field in self.model._meta.concrete_fields]
 
 class PartnerAdmin(admin.ModelAdmin):
+    change_list_template = 'admin/partner/partner_change_list.html'
     def get_list_display(self, request):
         return [field.name for field in self.model._meta.concrete_fields]
 
