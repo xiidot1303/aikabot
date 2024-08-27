@@ -31,6 +31,18 @@ class Visit(models.Model):
         return r
 
     @sync_to_async
+    def get_doctor(self):
+        return self.address.doctor
+
+    @sync_to_async
+    def get_pharmacy(self):
+        return self.address.pharmacy
+
+    @sync_to_async
+    def get_partner(self):
+        return self.address.partner
+
+    @sync_to_async
     def get_address_str(self):
         return self.address.__str__()
 
