@@ -9,6 +9,15 @@ class VisitAdmin(admin.ModelAdmin):
     search_fields = ['address']
     list_filter = ('bot_user', 'type', ('datetime', DateRangeFilter))
 
+    def changelist_view(self, request, extra_context=None):
+        # Add the URL parameters to the context
+        if extra_context is None:
+            extra_context = {}
+        extra_context['datetime__range__gte'] = request.GET.get('datetime__range__gte', None)
+        extra_context['datetime__range__lte'] = request.GET.get('datetime__range__lte', None)
+
+        return super().changelist_view(request, extra_context=extra_context)
+
     def location_link(self, obj):
         link = f"https://www.google.com/maps?q={obj.lat},{obj.lon}"
         return format_html(
