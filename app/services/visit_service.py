@@ -24,7 +24,6 @@ async def get_visit_by_id(id):
     return obj
 
 def filter_visits_by_date_range(start_date, end_date):
-    print(start_date, end_date, "\n\n")
     # create start date obj
     date_obj = datetime.strptime(start_date, "%d.%m.%Y")
     year = date_obj.year

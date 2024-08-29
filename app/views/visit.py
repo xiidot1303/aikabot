@@ -8,6 +8,7 @@ from app.services.visit_service import filter_visits_by_date_range
 async def export_visits_view(request):
     start_date = request.GET.get('datetime__range__gte')
     end_date = request.GET.get('datetime__range__lte')
+    print(start_date, end_date)
     start_date = "10.10.2020" if not start_date else start_date
     end_date = "10.10.2100" if not end_date else end_date
 

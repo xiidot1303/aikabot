@@ -13,8 +13,8 @@ class VisitAdmin(admin.ModelAdmin):
         # Add the URL parameters to the context
         if extra_context is None:
             extra_context = {}
-        extra_context['datetime__range__gte'] = request.GET.get('datetime__range__gte', None)
-        extra_context['datetime__range__lte'] = request.GET.get('datetime__range__lte', None)
+        extra_context['datetime__range__gte'] = request.GET.get('datetime__range__gte', "")
+        extra_context['datetime__range__lte'] = request.GET.get('datetime__range__lte', "")
 
         return super().changelist_view(request, extra_context=extra_context)
 
