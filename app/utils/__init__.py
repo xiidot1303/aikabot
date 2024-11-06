@@ -5,7 +5,7 @@ import random
 import string
 from yandex_geocoder import Client
 from decimal import Decimal
-from config import YANDEX_API_KEY
+from geopy.geocoders import Nominatim
 
 async def get_user_ip(request):
     x_forwarded_for = await request.META.get('HTTP_X_FORWARDED_FOR')
@@ -45,8 +45,13 @@ async def generate_random_symbols(length):
     return ''.join(random.choice(symbols) for _ in range(length))
 
 async def get_address_by_coordinates(lat, lon):
-    client = Client(YANDEX_API_KEY)
-    address = client.address(Decimal(lon), Decimal(lat))
+    try:
+        geolocator = Nominatim(user_agent="AIKAbot")
+        location = geolocator.reverse((lat, lon), language="ru")
+        address = location.address
+    except Exception as ex:
+        print(ex)
+        address = None
     return address
 
 async def generate_google_map_link(latitude, longitude):
