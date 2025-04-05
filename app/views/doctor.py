@@ -16,6 +16,8 @@ class DoctorCreateView(CreateView):
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context['title'] = 'Создание доктора'
+        context['form'].fields['fillial'].initial = self.request.GET.get('fillial')
+        context['form'].fields['fillial'].label = ""
         return context
 
 

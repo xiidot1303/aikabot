@@ -23,7 +23,7 @@ async def get_visit_by_id(id):
     obj = await Visit.objects.aget(id = id)
     return obj
 
-def filter_visits_by_date_range(start_date, end_date):
+def filter_visits_by_date_range(start_date, end_date, fillial):
     # create start date obj
     date_obj = datetime.strptime(start_date, "%d.%m.%Y")
     year = date_obj.year
@@ -37,4 +37,6 @@ def filter_visits_by_date_range(start_date, end_date):
     day = date_obj.day
     end_date = timezone.datetime(year, month, day, 23, 59)
     query = Visit.objects.filter(datetime__gte=start_date, datetime__lte=end_date)
+    if fillial:
+        query = query.filter(bot_user__fillial_id=fillial)
     return query 

@@ -13,15 +13,15 @@ async def get_visit_address(update: Update, context: CustomContext):
     # set values list and decription attribute
     match visit_type:
         case VISIT_TYPE.doctor:
-            values_list = await filter_doctors_by_name(text, await bot_user.get_regions())
+            values_list = await filter_doctors_by_name(text, await bot_user.get_regions(), await bot_user.get_fillial)
             title_attr = 'name'
             desc_attr = 'workplace'
         case VISIT_TYPE.pharmacy:
-            values_list = await filter_pharmacies_by_title(text, await bot_user.get_regions())
+            values_list = await filter_pharmacies_by_title(text, await bot_user.get_regions(), await bot_user.get_fillial)
             title_attr = 'title'
             desc_attr = 'contact'
         case VISIT_TYPE.partners:
-            values_list = await filter_partners_by_name(text)
+            values_list = await filter_partners_by_name(text, await bot_user.get_fillial)
             title_attr = 'name'
             desc_attr = None
 

@@ -11,6 +11,7 @@ class Bot_user(models.Model):
     lang = models.CharField(null=True, blank=True, max_length=4, default='uz', verbose_name='')
     date = models.DateTimeField(db_index=True, null=True, auto_now_add=True, blank=True, verbose_name='Дата регистрации')
     regions = models.ManyToManyField('bot.Region', verbose_name='Район')
+    fillial = models.ForeignKey('bot.Fillial', null=True, blank=True, on_delete=models.CASCADE, verbose_name='Филиал')
     is_active = models.BooleanField(default=True, verbose_name='Активен?')
 
     def __str__(self) -> str:
@@ -22,6 +23,11 @@ class Bot_user(models.Model):
     @sync_to_async
     def get_regions(self):
         return self.regions.all()
+
+    @property
+    @sync_to_async
+    def get_fillial(self):
+        return self.fillial
 
     class Meta:
         verbose_name = "Пользователь бота"
@@ -65,3 +71,14 @@ class Region(models.Model):
     
     def __str__(self) -> str:
         return self.title
+    
+
+class Fillial(models.Model):
+    title = models.CharField(null=True, blank=False, max_length=255, verbose_name='Название филиала')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Филиал"
+        verbose_name_plural = "Филиалы"

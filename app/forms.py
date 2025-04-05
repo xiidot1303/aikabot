@@ -5,20 +5,21 @@ from django import forms
 class DoctorForm(ModelForm):
     class Meta:
         model = Doctor
-        fields = ['name', 'contact', 'direction', 'workplace', 'region']
+        fields = ['name', 'contact', 'direction', 'workplace', 'region', 'fillial']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'workplace': forms.TextInput(attrs={'class': 'form-control'}),
             'direction': forms.TextInput(attrs={'class': 'form-control'}),
             'contact': forms.TextInput(attrs={'class': 'form-control'}),
-            'region': forms.Select(attrs={'class': 'form-control'})
+            'region': forms.Select(attrs={'class': 'form-control'}),
+            'fillial': forms.HiddenInput(attrs={'class': 'form-control'})
         }
     field_order = ['region', 'name', 'contact', 'direction', 'workplace']
 
 class PharmacyForm(ModelForm):
     class Meta:
         model = Pharmacy
-        fields = ['title', 'name', 'name2', 'responsible', 'contact', 'responsible_contact', 'region']
+        fields = ['title', 'name', 'name2', 'responsible', 'contact', 'responsible_contact', 'region', 'fillial']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'name': forms.TextInput(attrs={'class': 'form-control'}),
@@ -26,7 +27,8 @@ class PharmacyForm(ModelForm):
             'responsible': forms.TextInput(attrs={'class': 'form-control'}),
             'contact': forms.TextInput(attrs={'class': 'form-control'}),
             'responsible_contact': forms.TextInput(attrs={'class': 'form-control'}),
-            'region': forms.Select(attrs={'class': 'form-control'})
+            'region': forms.Select(attrs={'class': 'form-control'}),
+            'fillial': forms.HiddenInput(attrs={'class': 'form-control'})
         }
 
     field_order = ['region', 'title', 'name', 'name2', 'responsible', 'contact', 'responsible_contact']
@@ -34,7 +36,8 @@ class PharmacyForm(ModelForm):
 class PartnerForm(ModelForm):
     class Meta:
         model = Partner
-        fields = ['name']
+        fields = ['name', 'fillial']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'fillial': forms.HiddenInput(attrs={'class': 'form-control'})
         }

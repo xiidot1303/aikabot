@@ -78,7 +78,12 @@ class RegionAdmin(admin.ModelAdmin):
     def get_list_display(self, request):
         return [field.name for field in self.model._meta.concrete_fields]
 
+class FillialAdmin(admin.ModelAdmin):
+    list_display = ['title']
+
+
 admin.site.register(Bot_user, Bot_userAdmin)
 admin.site.register(Message, MesageAdmin)
 admin.site.register(JoinLink, JoinLinkAdmin)
 admin.site.register(Region, RegionAdmin)
+admin.site.register(Fillial, FillialAdmin)

@@ -25,6 +25,7 @@ async def _to_the_getting_location(update: Update, context: CustomContext):
     return GET_VISIT_LOCATION
 
 async def _to_the_getting_address(update: Update, context: CustomContext):
+    bot_user: Bot_user = await get_user_by_update(update)
     visit_type = context.user_data['visit_type']
     match visit_type:
         case VISIT_TYPE.doctor:
@@ -41,7 +42,7 @@ async def _to_the_getting_address(update: Update, context: CustomContext):
             search_button_text = await get_word('select partner', update)
         case _:
             return
-    web_app_info = WebAppInfo(url=f"{WEBAPP_URL}/{visit_type}-add")
+    web_app_info = WebAppInfo(url=f"{WEBAPP_URL}/{visit_type}-add?fillial={(await bot_user.get_fillial).id}")
     i_buttons = [
         [InlineKeyboardButton(text=search_button_text, switch_inline_query_current_chat="")],
         [InlineKeyboardButton(text=add_button_text, web_app=web_app_info)]
