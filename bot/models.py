@@ -75,6 +75,7 @@ class Region(models.Model):
 
 class Fillial(models.Model):
     title = models.CharField(null=True, blank=False, max_length=255, verbose_name='Название филиала')
+    tg_id = models.CharField(null=True, max_length=32, verbose_name="ID группу в телеграме")
 
     def __str__(self):
         return self.title
