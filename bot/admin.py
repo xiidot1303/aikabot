@@ -4,7 +4,7 @@ from django.utils.html import format_html
 from django.urls import reverse
 
 class Bot_userAdmin(admin.ModelAdmin):
-    list_display = ['name', 'username', 'phone', 'date', 'is_active', 'edit_button']
+    list_display = ['name', 'username', 'phone', 'fillial', 'date', 'is_active', 'edit_button']
 
     search_fields = ['name', 'username', 'phone']
     list_filter = ['date']
