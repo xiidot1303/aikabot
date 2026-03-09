@@ -1,6 +1,6 @@
 from bot.bot import *
 from app.services.visit_service import VISIT_TYPE
-from app.services.doctor_service import filter_doctors_by_name
+from app.services.doctor_service import filter_doctors_by_name_and_workplace
 from app.services.pharmacy_service import filter_pharmacies_by_title
 from app.services.partner_service import filter_partners_by_name
 
@@ -13,8 +13,8 @@ async def get_visit_address(update: Update, context: CustomContext):
     # set values list and decription attribute
     match visit_type:
         case VISIT_TYPE.doctor:
-            values_list = await filter_doctors_by_name(text, await bot_user.get_regions(), await bot_user.get_fillial)
-            title_attr = 'name'
+            values_list = await filter_doctors_by_name_and_workplace(text, await bot_user.get_regions(), await bot_user.get_fillial)
+            title_attr = 'title'
             desc_attr = 'workplace'
         case VISIT_TYPE.pharmacy:
             values_list = await filter_pharmacies_by_title(text, await bot_user.get_regions(), await bot_user.get_fillial)
