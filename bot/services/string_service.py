@@ -3,7 +3,7 @@ from app.services.visit_service import VISIT_TYPE, Visit
 from app.services.doctor_service import *
 from app.services.pharmacy_service import *
 from app.services.partner_service import *
-from app.utils import generate_google_map_link
+from app.utils import generate_google_map_link, generate_yandex_map_link
 
 async def confirm_visit_string(update, data):
     visit_type = data['visit_type']
@@ -72,7 +72,7 @@ async def new_visit_info_string(visit: Visit):
                 f"👤 {(await visit.get_bot_user()).name}\n📞 {(await visit.get_bot_user()).phone}\n\n" \
                     f"{Partner._meta.get_field('name').verbose_name}: {partner.name}\n"
     text += f"{lang_dict['comment'][1]}: {visit.comment}\n\n"
-    map_link = await generate_google_map_link(visit.lat, visit.lon)
+    map_link = await generate_yandex_map_link(visit.lat, visit.lon)
     location_text = visit.location if visit.location else map_link
     text += f"<a href='{map_link}'>{location_text}</a>"
     return text

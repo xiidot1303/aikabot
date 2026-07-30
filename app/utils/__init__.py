@@ -56,3 +56,7 @@ async def get_address_by_coordinates(lat, lon):
 
 async def generate_google_map_link(latitude, longitude):
     return f"https://www.google.com/maps?q={latitude},{longitude}"
+
+
+async def generate_yandex_map_link(latitude, longitude):
+    return f"https://yandex.com/maps/?ll={longitude},{latitude}&z=16&l=map&pt={longitude},{latitude}"
