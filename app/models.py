@@ -79,6 +79,7 @@ class Pharmacy(models.Model):
     title = models.CharField(null=True, blank=False, max_length=255, verbose_name="Юридическое название")
     name = models.CharField(null=True, blank=False, max_length=255, verbose_name="ФИО фармацевта 1")
     name2 = models.CharField(null=True, blank=True, max_length=255, verbose_name="ФИО фармацевта 2")
+    tin =  models.CharField(null=True, blank=True, max_length=32, verbose_name="ИНН")
     responsible = models.CharField(null=True, blank=True, max_length=255, verbose_name="Ответственный")
     contact = models.CharField(null=True, blank=False, max_length=32, verbose_name="Контакты")
     responsible_contact = models.CharField(null=True, blank=False, max_length=32, verbose_name="Контакт ответственного")

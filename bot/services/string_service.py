@@ -27,6 +27,7 @@ async def confirm_visit_string(update, data):
                     f"{Pharmacy._meta.get_field('name2').verbose_name}: {pharmacy.name2}\n" \
                         f"{Pharmacy._meta.get_field('contact').verbose_name}: {pharmacy.contact}\n" \
                             f"{Pharmacy._meta.get_field('title').verbose_name}: {pharmacy.title}\n" \
+                                f"{Pharmacy._meta.get_field('tin').verbose_name}: {pharmacy.tin}\n" \
 
         case VISIT_TYPE.partners:
             partner_id = data['partner_id']
@@ -62,6 +63,7 @@ async def new_visit_info_string(visit: Visit):
                     f"{Pharmacy._meta.get_field('name2').verbose_name}: {pharmacy.name2}\n" \
                         f"{Pharmacy._meta.get_field('contact').verbose_name}: {pharmacy.contact}\n" \
                             f"{Pharmacy._meta.get_field('title').verbose_name}: {pharmacy.title}\n" \
+                                f"{Pharmacy._meta.get_field('tin').verbose_name}: {pharmacy.tin}\n" \
 
 
         case VISIT_TYPE.partners:

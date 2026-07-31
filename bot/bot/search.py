@@ -4,6 +4,12 @@ from app.services.doctor_service import filter_doctors_by_name_and_workplace
 from app.services.pharmacy_service import filter_pharmacies_by_title
 from app.services.partner_service import filter_partners_by_name
 
+def build_description(obj, desc_attr):
+        if not desc_attr:
+            return None
+        parts = [f"{label}: {obj[field]}" for label, field in desc_attr if obj.get(field) is not None]
+        return "\n".join(parts) if parts else None
+
 async def get_visit_address(update: Update, context: CustomContext):
     chat_id = update.effective_user.id
     text = update.inline_query.query
@@ -15,11 +21,11 @@ async def get_visit_address(update: Update, context: CustomContext):
         case VISIT_TYPE.doctor:
             values_list = await filter_doctors_by_name_and_workplace(text, await bot_user.get_regions(), await bot_user.get_fillial)
             title_attr = 'name'
-            desc_attr = 'workplace'
+            desc_attr = [("Место работы", "workplace")]
         case VISIT_TYPE.pharmacy:
             values_list = await filter_pharmacies_by_title(text, await bot_user.get_regions(), await bot_user.get_fillial)
             title_attr = 'title'
-            desc_attr = 'contact'
+            desc_attr = [("Контакт", "contact"), ("ИНН", "tin")]
         case VISIT_TYPE.partners:
             values_list = await filter_partners_by_name(text, await bot_user.get_fillial)
             title_attr = 'name'
@@ -29,7 +35,7 @@ async def get_visit_address(update: Update, context: CustomContext):
     article = [
         await inlinequeryresultarticle(
             obj[title_attr],
-            obj[desc_attr] if desc_attr else None,
+            build_description(obj, desc_attr),
             title_id=obj['id']
             ) 
             async for obj in values_list

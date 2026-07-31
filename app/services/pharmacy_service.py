@@ -1,10 +1,14 @@
 from app.services import *
 from app.models import Pharmacy
 from bot.models import Region
+from django.db.models import Q
 
 @sync_to_async
 def filter_pharmacies_by_title(title, regions, fillial):
-    query = Pharmacy.objects.filter(title__icontains = title, region__in=regions, fillial=fillial).values()
+    query = Pharmacy.objects.filter(
+        Q(title__icontains = title) | Q(tin__icontains = title), 
+        region__in=regions, fillial=fillial
+    ).values()
     return query
 
 async def get_pharmacy_by_id(id) -> Pharmacy:

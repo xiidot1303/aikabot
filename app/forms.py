@@ -19,9 +19,10 @@ class DoctorForm(ModelForm):
 class PharmacyForm(ModelForm):
     class Meta:
         model = Pharmacy
-        fields = ['title', 'name', 'name2', 'responsible', 'contact', 'responsible_contact', 'region', 'fillial']
+        fields = ['title', 'tin', 'name', 'name2', 'responsible', 'contact', 'responsible_contact', 'region', 'fillial']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'tin': forms.TextInput(attrs={'class': 'form-control'}),
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'name2': forms.TextInput(attrs={'class': 'form-control'}),
             'responsible': forms.TextInput(attrs={'class': 'form-control'}),
@@ -31,7 +32,7 @@ class PharmacyForm(ModelForm):
             'fillial': forms.HiddenInput(attrs={'class': 'form-control'})
         }
 
-    field_order = ['region', 'title', 'name', 'name2', 'responsible', 'contact', 'responsible_contact']
+    field_order = ['region', 'title', 'tin', 'name', 'name2', 'responsible', 'contact', 'responsible_contact']
 
 class PartnerForm(ModelForm):
     class Meta:

@@ -29,6 +29,7 @@ def export_pharmacies_to_excel(request):
     # Define the headers
     headers = [
         "Юридическое название", 
+        "ИНН",
         "ФИО фармацевта 1", 
         "ФИО фармацевта 2", 
         "Ответственный", 
@@ -45,12 +46,13 @@ def export_pharmacies_to_excel(request):
     # Write data rows
     for row_num, pharmacy in enumerate(Pharmacy.objects.all(), 2):
         worksheet[f"A{row_num}"] = pharmacy.title
-        worksheet[f"B{row_num}"] = pharmacy.name
-        worksheet[f"C{row_num}"] = pharmacy.name2
-        worksheet[f"D{row_num}"] = pharmacy.responsible
-        worksheet[f"E{row_num}"] = pharmacy.contact
-        worksheet[f"F{row_num}"] = pharmacy.responsible_contact
-        worksheet[f"G{row_num}"] = pharmacy.region.title if pharmacy.region else ""  # Assuming region has a `name` attribute
+        worksheet[f"B{row_num}"] = pharmacy.tin
+        worksheet[f"C{row_num}"] = pharmacy.name
+        worksheet[f"D{row_num}"] = pharmacy.name2
+        worksheet[f"E{row_num}"] = pharmacy.responsible
+        worksheet[f"F{row_num}"] = pharmacy.contact
+        worksheet[f"G{row_num}"] = pharmacy.responsible_contact
+        worksheet[f"H{row_num}"] = pharmacy.region.title if pharmacy.region else ""  # Assuming region has a `name` attribute
 
     # Set the width of the columns for better readability
     for column in worksheet.columns:

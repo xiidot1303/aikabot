@@ -52,6 +52,9 @@ class PharmacyAdmin(admin.ModelAdmin):
     def get_list_display(self, request):
         return [field.name for field in self.model._meta.concrete_fields]
 
+    search_fields = ["title", "name", "name2", "tin", "responsible", "contact", "responsible_contact"]
+    list_filter = ["region", "fillial"]
+
 class PartnerAdmin(admin.ModelAdmin):
     change_list_template = 'admin/partner/partner_change_list.html'
     def get_list_display(self, request):
