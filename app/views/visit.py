@@ -20,10 +20,10 @@ async def export_visits_view(request):
 
     ws.column_dimensions['A'].width = 20
     ws.column_dimensions['B'].width = 17
-    ws.column_dimensions['Q'].width = 60
-    # Устанавливаем стандартную ширину для колонок от C до M
+    ws.column_dimensions['R'].width = 60
+    # Устанавливаем стандартную ширину для колонок от C до Q
     standard_width = 15  # Стандартная ширина
-    for col in range(ord('C'), ord('Q')):  # C (67) to M (77)
+    for col in range(ord('C'), ord('R')):  # C (67) to Q (81)
         ws.column_dimensions[chr(col)].width = standard_width
 
     ws.merge_cells(start_row=1, start_column=1, end_row=1, end_column=2)
@@ -36,15 +36,15 @@ async def export_visits_view(request):
     ws["C1"].font = Font(size=14, bold=True)
     ws["C1"].alignment = Alignment(horizontal="center")
 
-    ws.merge_cells(start_row=1, start_column=7, end_row=1, end_column=12)
+    ws.merge_cells(start_row=1, start_column=7, end_row=1, end_column=13)
     ws["G1"] = "Аптека"
     ws["G1"].font = Font(size=14, bold=True)
     ws["G1"].alignment = Alignment(horizontal="center")
 
-    ws.merge_cells(start_row=1, start_column=13, end_row=1, end_column=13)
-    ws["M1"] = "Партнёр"
-    ws["M1"].font = Font(size=14, bold=True)
-    ws["M1"].alignment = Alignment(horizontal="center")
+    ws.merge_cells(start_row=1, start_column=14, end_row=1, end_column=14)
+    ws["N1"] = "Партнёр"
+    ws["N1"].font = Font(size=14, bold=True)
+    ws["N1"].alignment = Alignment(horizontal="center")
 
 
     # Записываем заголовки
@@ -54,7 +54,7 @@ async def export_visits_view(request):
         "ФИО врача", "Контакты", "Направление", "Место работы", 
         # pharmacy
         "Ответственный", "Контакт ответственного", "ФИО фармацевта 1",
-        "ФИО фармацевта 2", "Контакты", "Юридическое название",
+        "ФИО фармацевта 2", "Контакты", "Юридическое название", "ИНН",
         # partner
         "Имя",
 
@@ -76,6 +76,7 @@ async def export_visits_view(request):
             pharmacy.responsible if pharmacy else "", pharmacy.responsible_contact if pharmacy else "",
             pharmacy.name if pharmacy else "", pharmacy.name2 if pharmacy else "",
             pharmacy.contact if pharmacy else "", pharmacy.title if pharmacy else "",
+            pharmacy.tin if pharmacy else "",
             # partner
             partner.name if partner else "",
 
@@ -100,13 +101,13 @@ async def export_visits_view(request):
     for row in range(1, ws.max_row + 1):
         for col in range(1, 3):  # Columns A, B
             ws.cell(row=row, column=col).fill = PatternFill(start_color="FFFF99", end_color="FFFF99", fill_type="solid")
-        for col in range(3, 7):  # Columns C, D, E, F, G
+        for col in range(3, 7):  # Columns C, D, E, F
             ws.cell(row=row, column=col).fill = PatternFill(start_color="1A237E", end_color="1A237E", fill_type="solid")
-        for col in range(7, 13):  # Columns G, H, I, J, K, L 
+        for col in range(7, 14):  # Columns G, H, I, J, K, L, M
             ws.cell(row=row, column=col).fill = PatternFill(start_color="2E7D32", end_color="2E7D32", fill_type="solid")
-        for col in range(13, 14):  # Column M
+        for col in range(14, 15):  # Column N
             ws.cell(row=row, column=col).fill = PatternFill(start_color="6A1B9A", end_color="6A1B9A", fill_type="solid")
-        for col in range(14, 18):  # Columns N, O, P, Q
+        for col in range(15, 19):  # Columns O, P, Q, R
             ws.cell(row=row, column=col).fill = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
 
     # Подготавливаем HTTP ответ с Excel файлом
